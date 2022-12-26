@@ -1,5 +1,6 @@
 <?php
 
+use App\Admin\Controllers\JnUserController;
 use Encore\Admin\Facades\Admin;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Route;
@@ -16,10 +17,10 @@ Route::group([
     $router->get('/', 'HomeController@index')->name('home');
 
     Route::resources([
-        'posts' => 'PostController',
-        'files' => 'FileController',
-        'companies' => 'CompanyController',
-        'reports' => 'ReportController',
+        'posts' => 'JnPostController',
+        'files' => 'JnFileController',
+        'companies' => 'JnCompanyController',
+        'reports' => 'JnReportController',
     ]);
-
+    $router->resource('users', JnUserController::class);
 });

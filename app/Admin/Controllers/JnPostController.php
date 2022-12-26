@@ -2,20 +2,20 @@
 
 namespace App\Admin\Controllers;
 
-use App\Models\Post;
+use App\Models\JnPost;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
 
-class PostController extends AdminController
+class JnPostController extends AdminController
 {
     /**
      * Title for current resource.
      *
      * @var string
      */
-    protected $title = 'Post';
+    protected $title = 'JnPost';
 
     /**
      * Make a grid builder.
@@ -24,11 +24,11 @@ class PostController extends AdminController
      */
     protected function grid()
     {
-        $grid = new Grid(new Post());
+        $grid = new Grid(new JnPost());
 
         $grid->column('id', __('Id'));
         $grid->column('user_id', __('User id'));
-        $grid->column('company_id', __('Company id'));
+        $grid->column('company_id', __('JnCompany id'));
         $grid->column('job_title', __('Job title'));
         $grid->column('levels', __('Levels'));
         $grid->column('district', __('District'));
@@ -60,11 +60,11 @@ class PostController extends AdminController
      */
     protected function detail($id)
     {
-        $show = new Show(Post::findOrFail($id));
+        $show = new Show(JnPost::findOrFail($id));
 
         $show->field('id', __('Id'));
         $show->field('user_id', __('User id'));
-        $show->field('company_id', __('Company id'));
+        $show->field('company_id', __('JnCompany id'));
         $show->field('job_title', __('Job title'));
         $show->field('levels', __('Levels'));
         $show->field('district', __('District'));
@@ -95,10 +95,10 @@ class PostController extends AdminController
      */
     protected function form()
     {
-        $form = new Form(new Post());
+        $form = new Form(new JnPost());
 
         $form->number('user_id', __('User id'));
-        $form->number('company_id', __('Company id'));
+        $form->number('company_id', __('JnCompany id'));
         $form->text('job_title', __('Job title'));
         $form->text('levels', __('Levels'));
         $form->text('district', __('District'));

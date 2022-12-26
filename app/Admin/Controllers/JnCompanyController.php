@@ -2,20 +2,20 @@
 
 namespace App\Admin\Controllers;
 
-use App\Models\Company;
+use App\Models\JnCompany;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
 
-class CompanyController extends AdminController
+class JnCompanyController extends AdminController
 {
     /**
      * Title for current resource.
      *
      * @var string
      */
-    protected $title = 'Company';
+    protected $title = 'JnCompany';
 
     /**
      * Make a grid builder.
@@ -24,7 +24,7 @@ class CompanyController extends AdminController
      */
     protected function grid()
     {
-        $grid = new Grid(new Company());
+        $grid = new Grid(new JnCompany());
 
         $grid->column('id', __('Id'));
         $grid->column('name', __('Name'));
@@ -47,7 +47,7 @@ class CompanyController extends AdminController
      */
     protected function detail($id)
     {
-        $show = new Show(Company::findOrFail($id));
+        $show = new Show(JnCompany::findOrFail($id));
 
         $show->field('id', __('Id'));
         $show->field('name', __('Name'));
@@ -69,7 +69,7 @@ class CompanyController extends AdminController
      */
     protected function form()
     {
-        $form = new Form(new Company());
+        $form = new Form(new JnCompany());
 
         $form->text('name', __('Name'));
         $form->text('address', __('Address'));

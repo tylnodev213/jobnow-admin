@@ -7,16 +7,19 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-class Report extends Model
+class JnCompany extends Model
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    protected $table = 'reports';
+    protected $table = 'companies';
 
     protected $fillable = [
-        'user_id',
-        'reported_id',
-        'type',
-        'status',
+        'name',
+        'address',
+        'country',
+        'zipcode',
+        'phone',
+        'email',
+        'logo',
     ];
 }

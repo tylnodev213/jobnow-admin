@@ -146,7 +146,7 @@ return [
     | Laravel-admin upload setting
     |--------------------------------------------------------------------------
     |
-    | File system configuration for form upload files and images, including
+    | JnFile system configuration for form upload files and images, including
     | disk and upload path.
     |
     */
