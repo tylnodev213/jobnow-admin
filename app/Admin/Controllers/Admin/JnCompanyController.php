@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Admin\Controllers;
+namespace App\Admin\Controllers\Admin;
 
 use App\Models\JnCompany;
 use Encore\Admin\Controllers\AdminController;

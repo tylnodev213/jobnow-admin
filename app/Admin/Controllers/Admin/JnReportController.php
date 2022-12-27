@@ -1,21 +1,21 @@
 <?php
 
-namespace App\Admin\Controllers;
+namespace App\Admin\Controllers\Admin;
 
-use App\Models\JnFile;
+use App\Models\JnReport;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
 
-class JnFileController extends AdminController
+class JnReportController extends AdminController
 {
     /**
      * Title for current resource.
      *
      * @var string
      */
-    protected $title = 'JnFile';
+    protected $title = 'JnReport';
 
     /**
      * Make a grid builder.
@@ -24,14 +24,15 @@ class JnFileController extends AdminController
      */
     protected function grid()
     {
-        $grid = new Grid(new JnFile());
+        $grid = new Grid(new JnReport());
 
         $grid->column('id', __('Id'));
         $grid->column('user_id', __('User id'));
-        $grid->column('post_id', __('JnPost id'));
-        $grid->column('link', __('Link'));
+        $grid->column('reported_id', __('Reported id'));
         $grid->column('type', __('Type'));
-        $grid->column('deleted_at', __('Deleted at'));
+        $grid->column('status', __('Status'));
+        $grid->column('created_at', __('Created at'));
+        $grid->column('updated_at', __('Updated at'));
 
         return $grid;
     }
@@ -44,14 +45,15 @@ class JnFileController extends AdminController
      */
     protected function detail($id)
     {
-        $show = new Show(JnFile::findOrFail($id));
+        $show = new Show(JnReport::findOrFail($id));
 
         $show->field('id', __('Id'));
         $show->field('user_id', __('User id'));
-        $show->field('post_id', __('JnPost id'));
-        $show->field('link', __('Link'));
+        $show->field('reported_id', __('Reported id'));
         $show->field('type', __('Type'));
-        $show->field('deleted_at', __('Deleted at'));
+        $show->field('status', __('Status'));
+        $show->field('created_at', __('Created at'));
+        $show->field('updated_at', __('Updated at'));
 
         return $show;
     }
@@ -63,12 +65,12 @@ class JnFileController extends AdminController
      */
     protected function form()
     {
-        $form = new Form(new JnFile());
+        $form = new Form(new JnReport());
 
         $form->number('user_id', __('User id'));
-        $form->number('post_id', __('JnPost id'));
-        $form->url('link', __('Link'));
+        $form->number('reported_id', __('Reported id'));
         $form->number('type', __('Type'));
+        $form->number('status', __('Status'));
 
         return $form;
     }

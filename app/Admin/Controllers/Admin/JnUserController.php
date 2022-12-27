@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Admin\Controllers;
+namespace App\Admin\Controllers\Admin;
 
 use App\Models\JnUser;
 use Encore\Admin\Controllers\AdminController;
