@@ -23,7 +23,6 @@ return new class extends Migration
             $table->integer('status');
             $table->dateTime('public_from');
             $table->dateTime('public_to');
-            $table->integer('type');
             $table->timestamps();
             $table->softDeletes();
         });

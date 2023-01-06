@@ -22,6 +22,5 @@ class JnNewsUser extends Model
         'status',
         'public_from',
         'public_to',
-        'type',
     ];
 }

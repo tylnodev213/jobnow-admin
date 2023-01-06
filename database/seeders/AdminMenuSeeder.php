@@ -225,8 +225,8 @@ class AdminMenuSeeder extends Seeder
         );
 
         // pivot tables
-        DB::table('np_admin_role_menu')->truncate();
-        DB::table('np_admin_role_menu')->insert(
+        DB::table('admin_role_menu')->truncate();
+        DB::table('admin_role_menu')->insert(
             [
                 [
                     "role_id" => 1,
@@ -237,11 +237,22 @@ class AdminMenuSeeder extends Seeder
             ]
         );
 
-        DB::table('np_admin_role_permissions')->truncate();
-        DB::table('np_admin_role_permissions')->insert(
+        DB::table('admin_role_permissions')->truncate();
+        DB::table('admin_role_permissions')->insert(
             [
                 [
                     "role_id" => 1,
+                    "permission_id" => 1
+                ],
+
+            ]
+        );
+
+        DB::table('admin_user_permissions')->truncate();
+        DB::table('admin_user_permissions')->insert(
+            [
+                [
+                    "user_id" => 1,
                     "permission_id" => 1
                 ],
 

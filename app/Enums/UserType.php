@@ -11,13 +11,13 @@ use BenSampo\Enum\Enum;
  */
 final class UserType extends Enum
 {
-    const Admin = 0;
-    const HR = 1;
-    const Candidate = 2;
+    const Admin = 1;
+    const HR = 2;
+    const Candidate = 3;
 
-    const AllHR = 3;
+    const AllHR = 4;
 
-    const AllCandidate = 4;
+    const AllCandidate = 5;
 
-    const All = 5;
+    const All = 6;
 }

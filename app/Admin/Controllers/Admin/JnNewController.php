@@ -2,11 +2,16 @@
 
 namespace App\Admin\Controllers\Admin;
 
+use App\Models\Administrator;
 use App\Models\JnNew;
+use App\Models\JnUser;
+use App\Models\NpTenantUser;
 use Encore\Admin\Controllers\AdminController;
+use Encore\Admin\Facades\Admin;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
+use Illuminate\Support\Facades\Auth;
 
 class JnNewController extends AdminController
 {
@@ -15,7 +20,7 @@ class JnNewController extends AdminController
      *
      * @var string
      */
-    protected $title = 'JnNew';
+    protected $title = 'Thông báo';
 
     /**
      * Make a grid builder.
@@ -27,18 +32,38 @@ class JnNewController extends AdminController
         $grid = new Grid(new JnNew());
 
         $grid->column('id', __('Id'));
-        $grid->column('title', __('Title'));
-        $grid->column('description', __('Description'));
-        $grid->column('from_user_type', __('From user type'));
-        $grid->column('from_user_id', __('From user id'));
-        $grid->column('to_user_type', __('To user type'));
+        $grid->column('title', __('Tiêu đề'));
+        $grid->column('description', __('Nội dung'));
+        $grid->column('from_user_type', __('Từ'))->display(function () {
+            if ($this->from_user_type == 1) {
+                return 'Admin';
+            }
+
+            if ($this->from_user_type == 2) {
+                return 'HR';
+            }
+
+            return 'Candidate';
+
+        });
+        $grid->column('from_user_id', __('Người gửi'))->display(function () {
+            return JnUser::find($this->from_user_id)->name;
+        });
+        $grid->column('to_user_type', __('Tới'))->display(function () {
+            if ($this->from_user_type == 1) {
+                return 'All HR';
+            }
+
+            if ($this->from_user_type == 2) {
+                return 'All Candidate';
+            }
+
+            return 'Admin';
+
+        });
         $grid->column('status', __('Status'));
         $grid->column('public_from', __('Public from'));
         $grid->column('public_to', __('Public to'));
-        $grid->column('type', __('Type'));
-        $grid->column('created_at', __('Created at'));
-        $grid->column('updated_at', __('Updated at'));
-        $grid->column('deleted_at', __('Deleted at'));
 
         return $grid;
     }
@@ -62,7 +87,6 @@ class JnNewController extends AdminController
         $show->field('status', __('Status'));
         $show->field('public_from', __('Public from'));
         $show->field('public_to', __('Public to'));
-        $show->field('type', __('Type'));
         $show->field('created_at', __('Created at'));
         $show->field('updated_at', __('Updated at'));
         $show->field('deleted_at', __('Deleted at'));
@@ -79,15 +103,41 @@ class JnNewController extends AdminController
     {
         $form = new Form(new JnNew());
 
+        $form->footer(function ($footer) {
+            $footer->disableReset();
+            $footer->disableViewCheck();
+            $footer->disableEditingCheck();
+            $footer->disableCreatingCheck();
+
+        });
+        $form->tools(function (Form\Tools $tools) {
+            $tools->disableDelete();
+            $tools->disableView();
+        });
+
         $form->text('title', __('Title'));
         $form->textarea('description', __('Description'));
-        $form->number('from_user_type', __('From user type'));
-        $form->number('from_user_id', __('From user id'));
-        $form->number('to_user_type', __('To user type'));
-        $form->number('status', __('Status'));
+        $form->radio('to_user_type', __('To'))->options([
+            2 => 'HR',
+            3 => 'Candidate',
+            6 => 'All',
+        ])->when(3,function ($form) {
+            $form->multipleSelect('to_user_candidate', __('Candidates'))->options(JnUser::where('role', 2)->pluck('email', 'id'));
+        })->when(2,function ($form) {
+            $form->multipleSelect('to_user_hr', __('HRs'))->options(JnUser::where('role', 3)->pluck('email', 'id'));
+        });
+
+        $form->radio('status', __('Is public'))->options([
+            0 => 'No',
+            1 => 'Yes',
+        ]);
         $form->datetime('public_from', __('Public from'))->default(date('Y-m-d H:i:s'));
         $form->datetime('public_to', __('Public to'))->default(date('Y-m-d H:i:s'));
-        $form->number('type', __('Type'));
+
+        $form->saving(function (Form $form) {
+            $form->input('from_user_type',3);
+            $form->input('from_user_id',Admin::user()->id);
+        });
 
         return $form;
     }
