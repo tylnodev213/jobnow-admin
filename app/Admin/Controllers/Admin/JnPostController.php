@@ -45,9 +45,6 @@ class JnPostController extends AdminController
         $grid->column('status', __('Status'));
         $grid->column('is_pinned', __('Is pinned'));
         $grid->column('slug', __('Slug'));
-        $grid->column('created_at', __('Created at'));
-        $grid->column('updated_at', __('Updated at'));
-        $grid->column('deleted_at', __('Deleted at'));
 
         return $grid;
     }

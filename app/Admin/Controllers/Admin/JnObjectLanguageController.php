@@ -2,20 +2,20 @@
 
 namespace App\Admin\Controllers\Admin;
 
-use App\Models\JnCompany;
+use App\Models\JnObjectLanguage;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
 
-class JnCompanyController extends AdminController
+class JnObjectLanguageController extends AdminController
 {
     /**
      * Title for current resource.
      *
      * @var string
      */
-    protected $title = 'Company';
+    protected $title = 'JnObjectLanguage';
 
     /**
      * Make a grid builder.
@@ -24,7 +24,7 @@ class JnCompanyController extends AdminController
      */
     protected function grid()
     {
-        $grid = new Grid(new JnCompany());
+        $grid = new Grid(new JnObjectLanguage());
 
         $grid->column('id', __('Id'));
         $grid->column('name', __('Name'));
@@ -34,6 +34,7 @@ class JnCompanyController extends AdminController
         $grid->column('phone', __('Phone'));
         $grid->column('email', __('Email'));
         $grid->column('logo', __('Logo'));
+        $grid->column('deleted_at', __('Deleted at'));
 
         return $grid;
     }
@@ -46,7 +47,7 @@ class JnCompanyController extends AdminController
      */
     protected function detail($id)
     {
-        $show = new Show(JnCompany::findOrFail($id));
+        $show = new Show(JnObjectLanguage::findOrFail($id));
 
         $show->field('id', __('Id'));
         $show->field('name', __('Name'));
@@ -68,7 +69,7 @@ class JnCompanyController extends AdminController
      */
     protected function form()
     {
-        $form = new Form(new JnCompany());
+        $form = new Form(new JnObjectLanguage());
 
         $form->text('name', __('Name'));
         $form->text('address', __('Address'));

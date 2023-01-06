@@ -1,21 +1,21 @@
 <?php
 
-namespace App\Admin\Controllers\Admin;
+namespace App\Admin\Controllers\User;
 
-use App\Models\JnUser;
+use App\Models\User;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
 
-class JnUserController extends AdminController
+class JnUserBannedController extends AdminController
 {
     /**
      * Title for current resource.
      *
      * @var string
      */
-    protected $title = 'JnUser';
+    protected $title = 'User';
 
     /**
      * Make a grid builder.
@@ -24,7 +24,7 @@ class JnUserController extends AdminController
      */
     protected function grid()
     {
-        $grid = new Grid(new JnUser());
+        $grid = new Grid(new User());
 
         $grid->column('id', __('Id'));
         $grid->column('name', __('Name'));
@@ -38,7 +38,7 @@ class JnUserController extends AdminController
         $grid->column('position', __('Position'));
         $grid->column('gender', __('Gender'));
         $grid->column('city', __('City'));
-        $grid->column('company_id', __('JnCompany id'));
+        $grid->column('company_id', __('Company id'));
         $grid->column('created_at', __('Created at'));
         $grid->column('updated_at', __('Updated at'));
         $grid->column('deleted_at', __('Deleted at'));
@@ -55,7 +55,7 @@ class JnUserController extends AdminController
      */
     protected function detail($id)
     {
-        $show = new Show(JnUser::findOrFail($id));
+        $show = new Show(User::findOrFail($id));
 
         $show->field('id', __('Id'));
         $show->field('name', __('Name'));
@@ -69,7 +69,7 @@ class JnUserController extends AdminController
         $show->field('position', __('Position'));
         $show->field('gender', __('Gender'));
         $show->field('city', __('City'));
-        $show->field('company_id', __('JnCompany id'));
+        $show->field('company_id', __('Company id'));
         $show->field('created_at', __('Created at'));
         $show->field('updated_at', __('Updated at'));
         $show->field('deleted_at', __('Deleted at'));
@@ -85,7 +85,7 @@ class JnUserController extends AdminController
      */
     protected function form()
     {
-        $form = new Form(new JnUser());
+        $form = new Form(new User());
 
         $form->text('name', __('Name'));
         $form->image('avatar', __('Avatar'));
@@ -93,12 +93,12 @@ class JnUserController extends AdminController
         $form->password('password', __('Password'));
         $form->mobile('phone', __('Phone'));
         $form->url('link', __('Link'));
-        $form->number('role', __('Role'))->default(2);
+        $form->number('role', __('Role'));
         $form->textarea('bio', __('Bio'));
         $form->text('position', __('Position'));
         $form->switch('gender', __('Gender'));
         $form->text('city', __('City'));
-        $form->number('company_id', __('JnCompany id'));
+        $form->number('company_id', __('Company id'));
         $form->text('remember_token', __('Remember token'));
 
         return $form;
