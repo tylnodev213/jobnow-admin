@@ -2,7 +2,7 @@
     @if(!isset($item['children']))
         <li>
             @if(url()->isValidUrl($item['uri']))
-                <a href="{{ $item['uri'] }}" target="_blank">
+                <a href="{{ $item['uri'] }}" target="_blank" style="pointer-events: none;">
                     @else
                         <a href="{{ admin_url($item['uri']) }}">
                             @endif
@@ -16,14 +16,13 @@
         </li>
     @else
         <li class="treeview active">
-            <a href="#">
+            <a href="#" style="pointer-events: none;">
                 <i class="fa {{ $item['icon'] }}"></i>
                 @if (Lang::has($titleTranslation = 'admin.menu_titles.' . trim(str_replace(' ', '_', strtolower($item['title'])))))
                     <span>{{ __($titleTranslation) }}</span>
                 @else
                     <span>{{ admin_trans($item['title']) }}</span>
                 @endif
-                <i class="fa fa-angle-left pull-right"></i>
             </a>
             <ul class="treeview-menu menu-open">
                 @foreach($item['children'] as $item)
