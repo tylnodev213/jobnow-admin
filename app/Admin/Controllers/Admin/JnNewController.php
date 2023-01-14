@@ -32,24 +32,9 @@ class JnNewController extends AdminController
         $grid = new Grid(new JnNew());
 
         $grid->column('id', __('Id'));
-        $grid->column('title', __('Tiêu đề'));
-        $grid->column('description', __('Nội dung'));
-        $grid->column('from_user_type', __('Từ'))->display(function () {
-            if ($this->from_user_type == 1) {
-                return 'Admin';
-            }
-
-            if ($this->from_user_type == 2) {
-                return 'HR';
-            }
-
-            return 'Candidate';
-
-        });
-        $grid->column('from_user_id', __('Người gửi'))->display(function () {
-            return JnUser::find($this->from_user_id)->name;
-        });
-        $grid->column('to_user_type', __('Tới'))->display(function () {
+        $grid->column('title', __('Subject'));
+        $grid->column('description', __('Content'));
+        $grid->column('to_user_type', __('To'))->display(function () {
             if ($this->from_user_type == 1) {
                 return 'All HR';
             }
@@ -58,7 +43,7 @@ class JnNewController extends AdminController
                 return 'All Candidate';
             }
 
-            return 'Admin';
+            return '';
 
         });
         $grid->column('status', __('Status'));
@@ -110,6 +95,14 @@ class JnNewController extends AdminController
             $footer->disableCreatingCheck();
 
         });
+
+        $form->footer(function ($footer) {
+            $footer->disableReset();
+            $footer->disableViewCheck();
+            $footer->disableEditingCheck();
+            $footer->disableCreatingCheck();
+
+        });
         $form->tools(function (Form\Tools $tools) {
             $tools->disableDelete();
             $tools->disableView();
@@ -127,16 +120,16 @@ class JnNewController extends AdminController
             $form->multipleSelect('to_user_hr', __('HRs'))->options(JnUser::where('role', 3)->pluck('email', 'id'));
         });
 
-        $form->radio('status', __('Is public'))->options([
-            0 => 'No',
-            1 => 'Yes',
+        $form->radio('status', __('Status'))->options([
+            1 => 'Public',
+            2 => 'Private',
         ]);
         $form->datetime('public_from', __('Public from'))->default(date('Y-m-d H:i:s'));
         $form->datetime('public_to', __('Public to'))->default(date('Y-m-d H:i:s'));
 
         $form->saving(function (Form $form) {
-            $form->input('from_user_type',3);
-            $form->input('from_user_id',Admin::user()->id);
+            $form->input('from_user_type', 3);
+            $form->input('from_user_id', Admin::user()->id);
         });
 
         return $form;

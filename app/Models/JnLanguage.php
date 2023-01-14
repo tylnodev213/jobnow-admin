@@ -11,7 +11,7 @@ class JnLanguage extends Model
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    protected $table = 'companies';
+    protected $table = 'languages';
 
     protected $fillable = [
         'name',

@@ -18,6 +18,8 @@ class CreateObjectLanguageTable extends Migration
             $table->foreignId('language_id')->constrained();
             $table->primary(['object_id', 'language_id']);
             $table->integer('type');
+            $table->timestamps();
+            $table->softDeletes();
         });
     }
 

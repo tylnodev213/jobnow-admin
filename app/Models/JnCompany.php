@@ -13,6 +13,8 @@ class JnCompany extends Model
 
     protected $table = 'companies';
 
+    protected $timestamp = false;
+
     protected $fillable = [
         'name',
         'address',
@@ -21,5 +23,7 @@ class JnCompany extends Model
         'phone',
         'email',
         'logo',
+        'updated_at',
+        'created_at',
     ];
 }

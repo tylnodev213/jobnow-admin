@@ -30,21 +30,13 @@ class JnPostController extends AdminController
         $grid->column('user_id', __('User id'));
         $grid->column('company_id', __('JnCompany id'));
         $grid->column('job_title', __('Job title'));
-        $grid->column('levels', __('Levels'));
-        $grid->column('district', __('District'));
         $grid->column('city', __('City'));
-        $grid->column('remotable', __('Remotable'));
-        $grid->column('can_parttime', __('Can parttime'));
-        $grid->column('min_salary', __('Min salary'));
-        $grid->column('max_salary', __('Max salary'));
         $grid->column('currency_salary', __('Currency salary'));
         $grid->column('requirement', __('Requirement'));
         $grid->column('start_date', __('Start date'));
         $grid->column('end_date', __('End date'));
         $grid->column('number_applicants', __('Number applicants'));
         $grid->column('status', __('Status'));
-        $grid->column('is_pinned', __('Is pinned'));
-        $grid->column('slug', __('Slug'));
 
         return $grid;
     }
@@ -94,24 +86,24 @@ class JnPostController extends AdminController
     {
         $form = new Form(new JnPost());
 
+        $form->footer(function ($footer) {
+            $footer->disableReset();
+            $footer->disableViewCheck();
+            $footer->disableEditingCheck();
+            $footer->disableCreatingCheck();
+
+        });
+
         $form->number('user_id', __('User id'));
         $form->number('company_id', __('JnCompany id'));
         $form->text('job_title', __('Job title'));
-        $form->text('levels', __('Levels'));
-        $form->text('district', __('District'));
         $form->text('city', __('City'));
-        $form->number('remotable', __('Remotable'));
-        $form->switch('can_parttime', __('Can parttime'));
-        $form->decimal('min_salary', __('Min salary'));
-        $form->decimal('max_salary', __('Max salary'));
         $form->number('currency_salary', __('Currency salary'))->default(1);
         $form->textarea('requirement', __('Requirement'));
         $form->date('start_date', __('Start date'))->default(date('Y-m-d'));
         $form->date('end_date', __('End date'))->default(date('Y-m-d'));
         $form->number('number_applicants', __('Number applicants'));
         $form->number('status', __('Status'));
-        $form->switch('is_pinned', __('Is pinned'));
-        $form->text('slug', __('Slug'));
 
         return $form;
     }

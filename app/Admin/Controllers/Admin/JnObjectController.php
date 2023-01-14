@@ -8,7 +8,7 @@ use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
 
-class JnObjectLanguageController extends AdminController
+class JnObjectController extends AdminController
 {
     /**
      * Title for current resource.

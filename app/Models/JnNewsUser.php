@@ -11,7 +11,7 @@ class JnNewsUser extends Model
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    protected $table = 'news';
+    protected $table = 'news_users';
 
     protected $fillable = [
         'title',

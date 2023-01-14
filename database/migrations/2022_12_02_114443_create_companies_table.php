@@ -25,6 +25,8 @@ class CreateCompaniesTable extends Migration
             $table->string('phone');
             $table->string('email');
             $table->string('logo');
+            $table->timestamps();
+            $table->softDeletes();
         });
     }
 

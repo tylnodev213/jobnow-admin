@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateFilesTable extends Migration
+return new class extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,15 @@ class CreateFilesTable extends Migration
      */
     public function up()
     {
-        Schema::create('files', function (Blueprint $table) {
+        Schema::create('payments_tables', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained();
-            $table->foreignId('post_id')->nullable()->constrained();
-            $table->string('link');
-            $table->integer('type');
+            $table->foreignId('post_cost_id');
+            $table->tinyInteger('status');
+            $table->integer('number');
+            $table->text('reason_cancel');
+            $table->bigInteger('fee_vat');
+            $table->bigInteger('discount');
+            $table->bigInteger('total_bill');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -31,6 +34,6 @@ class CreateFilesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('files');
+        Schema::dropIfExists('payments_tables');
     }
-}
+};

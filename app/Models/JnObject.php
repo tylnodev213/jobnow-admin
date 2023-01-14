@@ -7,16 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-class JnBlog extends Model
+class JnObject extends Model
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    protected $table = 'blogs';
+    protected $table = 'objects';
 
     protected $fillable = [
-        'user_id',
-        'title',
-        'img_url',
-        'content',
+        'name',
     ];
 }

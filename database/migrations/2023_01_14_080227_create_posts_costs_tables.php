@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateReportsTable extends Migration
+return new class extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,13 @@ class CreateReportsTable extends Migration
      */
     public function up()
     {
-        Schema::create('reports', function (Blueprint $table) {
+        Schema::create('posts_costs_tables', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained();
-            $table->unsignedBigInteger('reported_id');
-            $table->integer('type');
-            $table->integer('status');
+            $table->string('title');
+            $table->integer('cost');
+            $table->integer('level');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -30,6 +30,6 @@ class CreateReportsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('reports');
+        Schema::dropIfExists('posts_costs_tables');
     }
-}
+};

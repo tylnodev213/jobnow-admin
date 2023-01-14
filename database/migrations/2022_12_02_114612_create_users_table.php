@@ -28,6 +28,7 @@ class CreateUsersTable extends Migration
             $table->string('city');
             $table->foreignId('company_id')->constrained();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

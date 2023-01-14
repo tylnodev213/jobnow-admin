@@ -26,23 +26,18 @@ class JnUserCandidateController extends AdminController
     {
         $grid = new Grid(new User());
 
+        $grid->model()
+            ->where('role', 1)
+            ->where('status', 1);
+
         $grid->column('id', __('Id'));
         $grid->column('name', __('Name'));
         $grid->column('avatar', __('Avatar'));
         $grid->column('email', __('Email'));
-        $grid->column('password', __('Password'));
         $grid->column('phone', __('Phone'));
-        $grid->column('link', __('Link'));
-        $grid->column('role', __('Role'));
-        $grid->column('bio', __('Bio'));
-        $grid->column('position', __('Position'));
         $grid->column('gender', __('Gender'));
-        $grid->column('city', __('City'));
-        $grid->column('company_id', __('Company id'));
         $grid->column('created_at', __('Created at'));
         $grid->column('updated_at', __('Updated at'));
-        $grid->column('deleted_at', __('Deleted at'));
-        $grid->column('remember_token', __('Remember token'));
 
         return $grid;
     }

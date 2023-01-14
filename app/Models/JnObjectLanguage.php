@@ -11,7 +11,7 @@ class JnObjectLanguage extends Model
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    protected $table = 'companies';
+    protected $table = 'object_language';
 
     protected $fillable = [
         'object_id',

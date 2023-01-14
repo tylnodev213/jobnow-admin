@@ -28,12 +28,9 @@ class JnCompanyController extends AdminController
 
         $grid->column('id', __('Id'));
         $grid->column('name', __('Name'));
-        $grid->column('address', __('Address'));
         $grid->column('country', __('Country'));
-        $grid->column('zipcode', __('Zipcode'));
         $grid->column('phone', __('Phone'));
         $grid->column('email', __('Email'));
-        $grid->column('logo', __('Logo'));
 
         return $grid;
     }
@@ -56,7 +53,6 @@ class JnCompanyController extends AdminController
         $show->field('phone', __('Phone'));
         $show->field('email', __('Email'));
         $show->field('logo', __('Logo'));
-        $show->field('deleted_at', __('Deleted at'));
 
         return $show;
     }
@@ -70,13 +66,21 @@ class JnCompanyController extends AdminController
     {
         $form = new Form(new JnCompany());
 
+        $form->footer(function ($footer) {
+            $footer->disableReset();
+            $footer->disableViewCheck();
+            $footer->disableEditingCheck();
+            $footer->disableCreatingCheck();
+
+        });
+
         $form->text('name', __('Name'));
         $form->text('address', __('Address'));
         $form->text('country', __('Country'));
         $form->text('zipcode', __('Zipcode'));
         $form->mobile('phone', __('Phone'));
         $form->email('email', __('Email'));
-        $form->text('logo', __('Logo'));
+        $form->file('logo', __('Logo'));
 
         return $form;
     }

@@ -30,7 +30,7 @@ class CreatePostsTable extends Migration
             $table->date('end_date')->nullable();
             $table->integer('number_applicants')->nullable();
             $table->integer('status')->default(0);
-            $table->string('slug');
+            $table->integer('number_user_seen');
             $table->timestamps();
             $table->softDeletes();
         });
