@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('posts_costs_discount_tables', function (Blueprint $table) {
+        Schema::create('posts_costs_discount', function (Blueprint $table) {
             $table->id();
             $table->string('title');
             $table->integer('discount_percent');
@@ -31,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('posts_costs_discount_tables');
+        Schema::dropIfExists('posts_costs_discount');
     }
 };
